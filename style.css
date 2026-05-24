@@ -1,0 +1,407 @@
+/* === RESET & VARIABLES === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --rouge: #e74c3c;
+  --rouge-clair: #fdf0ef;
+  --vert: #2ecc71;
+  --vert-clair: #edfbf3;
+  --neutre: #2c3e50;
+  --fond: #f4f6f9;
+  --carte: #ffffff;
+  --texte: #34495e;
+  --texte-leger: #7f8c8d;
+  --bordure: #e8ecf0;
+  --rayon: 10px;
+  --ombre: 0 2px 10px rgba(0, 0, 0, 0.07);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--fond);
+  color: var(--texte);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* === HEADER === */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 60px;
+  background: var(--neutre);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+#header-solde {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.label-solde {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8rem;
+}
+
+.badge-solde {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.badge-solde.positif { background: rgba(46, 204, 113, 0.35); }
+.badge-solde.negatif { background: rgba(231, 76, 60, 0.35); }
+
+/* === LAYOUT === */
+.app-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr 360px;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  min-height: calc(100vh - 60px);
+  align-items: start;
+}
+
+/* === TITRES DE SECTIONS === */
+h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texte-leger);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texte-leger);
+  margin-bottom: 0.75rem;
+}
+
+/* === FORMULAIRE === */
+#panel-formulaire {
+  background: var(--carte);
+  border-radius: var(--rayon);
+  padding: 1.25rem;
+  box-shadow: var(--ombre);
+}
+
+.champ-groupe {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.9rem;
+}
+
+.champ-groupe label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--texte-leger);
+}
+
+.champ-groupe input,
+.champ-groupe select {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1.5px solid var(--bordure);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--texte);
+  background: #fff;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.champ-groupe select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237f8c8d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.champ-groupe input:focus,
+.champ-groupe select:focus {
+  outline: none;
+  border-color: var(--neutre);
+}
+
+.champ-groupe input.champ-erreur,
+.champ-groupe select.champ-erreur {
+  border-color: var(--rouge);
+}
+
+.msg-erreur {
+  font-size: 0.75rem;
+  color: var(--rouge);
+  min-height: 1em;
+}
+
+.btn-ajouter {
+  width: 100%;
+  padding: 0.65rem;
+  background: var(--neutre);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 0.25rem;
+}
+
+.btn-ajouter:hover { background: #3d5166; }
+.btn-ajouter:active { transform: scale(0.98); }
+
+/* === DASHBOARD === */
+#panel-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grille-bilan {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.carte-bilan {
+  background: var(--carte);
+  border-radius: var(--rayon);
+  padding: 1rem 1.1rem;
+  box-shadow: var(--ombre);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.carte-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texte-leger);
+}
+
+.carte-bilan .valeur {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--neutre);
+}
+
+.carte-bilan .valeur.positif { color: var(--vert); }
+.carte-bilan .valeur.negatif { color: var(--rouge); }
+
+.carte-revenus .valeur { color: var(--vert); }
+.carte-depenses .valeur { color: var(--rouge); }
+
+.carte-chart {
+  background: var(--carte);
+  border-radius: var(--rayon);
+  padding: 1.25rem;
+  box-shadow: var(--ombre);
+}
+
+.chart-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* === HISTORIQUE === */
+#panel-historique {
+  background: var(--carte);
+  border-radius: var(--rayon);
+  padding: 1.25rem;
+  box-shadow: var(--ombre);
+}
+
+/* === BARRE FILTRES === */
+#barre-filtres {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+#barre-filtres select,
+#barre-filtres input[type="month"] {
+  padding: 0.4rem 0.6rem;
+  border: 1.5px solid var(--bordure);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--texte);
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+#barre-filtres select { padding-right: 1.5rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%237f8c8d' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.5rem center; }
+
+#barre-filtres select:focus,
+#barre-filtres input[type="month"]:focus {
+  outline: none;
+  border-color: var(--neutre);
+}
+
+#btn-reinitialiser-filtres {
+  padding: 0.4rem 0.75rem;
+  background: transparent;
+  border: 1.5px solid var(--bordure);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--texte-leger);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+#btn-reinitialiser-filtres:hover {
+  border-color: var(--neutre);
+  color: var(--neutre);
+}
+
+/* === LISTE TRANSACTIONS === */
+#liste-transactions {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+#liste-transactions::-webkit-scrollbar { width: 4px; }
+#liste-transactions::-webkit-scrollbar-track { background: transparent; }
+#liste-transactions::-webkit-scrollbar-thumb { background: var(--bordure); border-radius: 2px; }
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border-left: 4px solid transparent;
+  background: var(--fond);
+  gap: 0.5rem;
+  transition: background 0.15s;
+}
+
+.transaction-item:hover { background: #edf0f4; }
+.transaction-item.depense { border-left-color: var(--rouge); }
+.transaction-item.revenu  { border-left-color: var(--vert); }
+
+.transaction-infos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.transaction-date {
+  font-size: 0.72rem;
+  color: var(--texte-leger);
+}
+
+.transaction-description {
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.transaction-categorie {
+  font-size: 0.72rem;
+  color: var(--texte-leger);
+  text-transform: capitalize;
+}
+
+.transaction-droite {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.montant {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.montant.depense { color: var(--rouge); }
+.montant.revenu  { color: var(--vert); }
+
+.btn-supprimer {
+  background: none;
+  border: none;
+  color: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.3rem;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1;
+}
+
+.transaction-item:hover .btn-supprimer { color: var(--texte-leger); }
+.btn-supprimer:hover { color: var(--rouge) !important; background: var(--rouge-clair); }
+
+.vide {
+  text-align: center;
+  color: var(--texte-leger);
+  font-size: 0.85rem;
+  padding: 2rem 1rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grille-bilan {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #liste-transactions {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 500px) {
+  .grille-bilan {
+    grid-template-columns: 1fr;
+  }
+
+  header { padding: 0 1rem; }
+  .app-grid { padding: 0.75rem; }
+}

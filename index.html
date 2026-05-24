@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Budget</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Mon Budget</h1>
+    <div id="header-solde">
+      <span class="label-solde">Solde actuel</span>
+      <span id="badge-solde" class="badge-solde">0,00 €</span>
+    </div>
+  </header>
+
+  <main class="app-grid">
+
+    <aside id="panel-formulaire">
+      <h2>Ajouter une transaction</h2>
+      <form id="form-transaction" novalidate>
+
+        <div class="champ-groupe">
+          <label for="champ-type">Type</label>
+          <select id="champ-type" name="type">
+            <option value="depense">Dépense</option>
+            <option value="revenu">Revenu</option>
+          </select>
+        </div>
+
+        <div class="champ-groupe">
+          <label for="champ-montant">Montant (€)</label>
+          <input type="number" id="champ-montant" name="montant"
+                 placeholder="0,00" step="0.01" min="0.01">
+          <span class="msg-erreur" id="erreur-montant"></span>
+        </div>
+
+        <div class="champ-groupe">
+          <label for="champ-categorie">Catégorie</label>
+          <select id="champ-categorie" name="categorie">
+            <option value="">— Choisir —</option>
+            <option value="alimentation">Alimentation</option>
+            <option value="logement">Logement</option>
+            <option value="transport">Transport</option>
+            <option value="loisirs">Loisirs</option>
+            <option value="santé">Santé</option>
+            <option value="autres">Autres</option>
+          </select>
+          <span class="msg-erreur" id="erreur-categorie"></span>
+        </div>
+
+        <div class="champ-groupe">
+          <label for="champ-date">Date</label>
+          <input type="date" id="champ-date" name="date">
+        </div>
+
+        <div class="champ-groupe">
+          <label for="champ-description">Description</label>
+          <input type="text" id="champ-description" name="description"
+                 placeholder="Facultatif" maxlength="100">
+        </div>
+
+        <button type="submit" class="btn-ajouter">Ajouter</button>
+
+      </form>
+    </aside>
+
+    <section id="panel-dashboard">
+      <h2>Tableau de bord</h2>
+
+      <div class="grille-bilan">
+        <div class="carte-bilan" id="carte-solde">
+          <span class="carte-label">Solde</span>
+          <span class="valeur">0,00 €</span>
+        </div>
+        <div class="carte-bilan carte-revenus" id="carte-revenus">
+          <span class="carte-label">Revenus</span>
+          <span class="valeur">0,00 €</span>
+        </div>
+        <div class="carte-bilan carte-depenses" id="carte-depenses">
+          <span class="carte-label">Dépenses</span>
+          <span class="valeur">0,00 €</span>
+        </div>
+      </div>
+
+      <div class="carte-chart">
+        <h3>Répartition des dépenses</h3>
+        <div class="chart-wrapper">
+          <canvas id="chart-categories"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-historique">
+      <h2>Historique</h2>
+
+      <div id="barre-filtres">
+        <select id="filtre-type">
+          <option value="tous">Tous types</option>
+          <option value="depense">Dépenses</option>
+          <option value="revenu">Revenus</option>
+        </select>
+        <select id="filtre-categorie">
+          <option value="toutes">Toutes catégories</option>
+        </select>
+        <input type="month" id="filtre-mois" title="Filtrer par mois">
+        <button id="btn-reinitialiser-filtres" type="button">Réinitialiser</button>
+      </div>
+
+      <ul id="liste-transactions">
+        <li class="vide">Aucune transaction pour le moment.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
