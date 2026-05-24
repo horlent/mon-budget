@@ -97,3 +97,12 @@ Clé : `budget_transactions`
 - Variables CSS dans `:root`, aucune couleur ou taille codée en dur dans les règles
 - IDs HTML comme seuls hooks JS (jamais de sélection par classe)
 - Layout 3 colonnes sur desktop, 1 colonne sous 900px
+
+## Dépôt & déploiement
+
+- **GitHub** : https://github.com/horlent/mon-budget
+- **GitHub Pages** : https://horlent.github.io/mon-budget/
+- Branche principale : `main`
+- Git configuré localement avec l'identité `horlent` / `horlent@users.noreply.github.com`
+
+> Note : le `localStorage` est propre à chaque origine. Les données saisies en local (`file://`) ne sont pas partagées avec la version GitHub Pages.
